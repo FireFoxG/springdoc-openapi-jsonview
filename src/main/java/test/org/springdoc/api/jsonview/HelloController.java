@@ -46,7 +46,7 @@ public class HelloController {
   @GetMapping(value = "/empty-example-value")
   public void emptyExampleValue(
       @RequestParam
-      @Parameter(in = ParameterIn.QUERY, schema = @Schema(example = "")) String example) {
+      @Parameter(in = ParameterIn.QUERY) String example) {
   }
 
 }
