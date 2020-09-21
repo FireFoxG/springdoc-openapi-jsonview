@@ -20,22 +20,33 @@ package test.org.springdoc.api.jsonview;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
 
 
-	@RequestMapping(
-			value = "/test",
-			method = RequestMethod.GET,
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	@JsonView(View.Test.class)
-	public TestResponse test() {
-		return new TestResponse(true, "123123123");
-	}
+  @RequestMapping(
+      value = "/test",
+      method = RequestMethod.GET,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  @JsonView(View.Test.class)
+  public TestResponse test() {
+    return new TestResponse(true, "123123123");
+  }
+
+  @GetMapping(value = "/empty-example-value")
+  public void emptyExampleValue(
+      @RequestParam
+      @Parameter(in = ParameterIn.QUERY, schema = @Schema(example = "")) String example) {
+  }
 
 }
